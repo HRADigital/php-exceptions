@@ -1,6 +1,7 @@
 # php-exceptions
 
 [![CI](https://github.com/HRADigital/php-exceptions/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/HRADigital/php-exceptions/actions/workflows/ci.yml)
+[![Release](https://github.com/HRADigital/php-exceptions/actions/workflows/release.yml/badge.svg?branch=master)](https://github.com/HRADigital/php-exceptions/actions/workflows/release.yml)
 [![Release](https://img.shields.io/github/v/release/HRADigital/php-exceptions)](https://github.com/HRADigital/php-exceptions/releases)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hradigital/php-exceptions)](https://packagist.org/packages/hradigital/php-exceptions)
 [![Total Downloads](https://img.shields.io/packagist/dt/hradigital/php-exceptions)](https://packagist.org/packages/hradigital/php-exceptions)
@@ -13,18 +14,13 @@
 [![Code Size](https://img.shields.io/github/languages/code-size/HRADigital/php-exceptions)](https://github.com/HRADigital/php-exceptions)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
-A curated set of **reusable, semantic domain exceptions** for Domain-Driven Design (DDD) PHP applications.
+A curated set of reusable, semantic domain exceptions for Domain-Driven Design PHP applications. Their names mirror the HTTP 4XX/5XX families because that vocabulary is widely understood, but they are raised in the domain layer, outside any transport, and translated at the boundary into an HTTP response, RPC error, CLI exit or queue dead-letter. Throwing the right exception is part of your domain language, where a generic InvalidArgumentException leaks plumbing into it. Framework-agnostic, with zero runtime dependencies beyond the PHP standard library, on any PHP 8.1+ project.
 
-These are domain exceptions, not HTTP exceptions. Their names mirror the HTTP 4XX/5XX families because that vocabulary is widely understood, but they are raised in the **domain layer**, outside any transport, and translated at the boundary into an HTTP response, RPC error, CLI exit or queue dead-letter.
-
-Throwing the right exception is part of your domain language; a generic `\InvalidArgumentException` leaks plumbing into it. The package is framework-agnostic, with zero runtime dependencies beyond the PHP standard library, and works on any PHP 8.1+ project.
-
-- **Client exceptions** - caller-fault types aligned to the 4XX family, from `BadRequestException` through `UnavailableForLegalReasonsException`, each carrying a sensible default message and status code.
+- **Client exceptions** - caller-fault types aligned to the 4XX family, from `BadRequestException` through `UnavailableForLegalReasonsException`, each with a default message and status code.
 - **Server exceptions** - system-fault types aligned to the 5XX family, from `InternalServerErrorException` through `LoopDetectedException`.
 - **`AbstractBaseException`** - the common base, extending PHP's native `\DomainException`, so a single `catch` captures everything in this package.
-- **`Request\RequestFailureException`** - structured per-field validation failures, for the case where one rejected payload carries many reasons.
+- **`Request\RequestFailureException`** - structured per-field validation failures, for one rejected payload carrying many reasons.
 - **Extension by intent** - every type is meant to be extended by your own named exception, so callers can still catch the broader intent.
-- **No framework lock-in** - pure PHP, dropped into any application or framework.
 
 ## Requirements
 
@@ -103,7 +99,7 @@ composer test
 
 ## Continuous Integration
 
-GitHub Actions runs PHPUnit on every push and pull request, across PHP 8.1 / 8.2 / 8.3 / 8.4.
+GitHub Actions runs PHPUnit on every push and pull request, across PHP 8.1 / 8.2 / 8.3 / 8.4 / 8.5.
 
 ## Versioning
 
