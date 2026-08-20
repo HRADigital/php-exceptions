@@ -2,7 +2,7 @@
     "name": "hradigital/php-exceptions",
     "description": "PHP Domain Exceptions library — a curated set of reusable, semantic exceptions for Domain-Driven Design applications.",
     "type": "library",
-    "license": "GPL-3.0-or-later",
+    "license": "MPL-2.0",
     "homepage": "https://github.com/HRADigital/php-exceptions",
     "support": {
         "issues": "https://github.com/HRADigital/php-exceptions/issues",

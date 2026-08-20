@@ -115,4 +115,10 @@ If you discover a security vulnerability, please email **github@hradigital.com**
 
 ## License
 
-This package is open-sourced software licensed under the [GNU General Public License v3.0 or later](LICENSE).
+This package is open-sourced software licensed under the [Mozilla Public License 2.0](LICENSE).
+
+You may use this package in closed-source and commercial products. If you modify and
+distribute the package's own files, those files must remain under the MPL-2.0.
+
+The `HRADigital` name and package names are not covered by that licence - see
+[TRADEMARK.md](TRADEMARK.md).
