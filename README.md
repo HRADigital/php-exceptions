@@ -1,26 +1,30 @@
 # php-exceptions
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/hradigital/php-exceptions.svg?style=flat-square)](https://packagist.org/packages/hradigital/php-exceptions)
-[![CI](https://github.com/HRADigital/php-exceptions/actions/workflows/ci.yml/badge.svg)](https://github.com/HRADigital/php-exceptions/actions/workflows/ci.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/hradigital/php-exceptions.svg?style=flat-square)](https://packagist.org/packages/hradigital/php-exceptions)
-[![PHP Version](https://img.shields.io/packagist/php-v/hradigital/php-exceptions.svg?style=flat-square)](https://packagist.org/packages/hradigital/php-exceptions)
-[![License](https://img.shields.io/packagist/l/hradigital/php-exceptions.svg?style=flat-square)](LICENSE)
+[![CI](https://github.com/HRADigital/php-exceptions/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/HRADigital/php-exceptions/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/HRADigital/php-exceptions)](https://github.com/HRADigital/php-exceptions/releases)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/hradigital/php-exceptions)](https://packagist.org/packages/hradigital/php-exceptions)
+[![Total Downloads](https://img.shields.io/packagist/dt/hradigital/php-exceptions)](https://packagist.org/packages/hradigital/php-exceptions)
+[![PHP Version](https://img.shields.io/packagist/php-v/hradigital/php-exceptions)](https://packagist.org/packages/hradigital/php-exceptions)
+[![License](https://img.shields.io/github/license/HRADigital/php-exceptions)](LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/HRADigital/php-exceptions)](https://github.com/HRADigital/php-exceptions/commits/master)
+[![Open Issues](https://img.shields.io/github/issues/HRADigital/php-exceptions)](https://github.com/HRADigital/php-exceptions/issues)
+[![Contributors](https://img.shields.io/github/contributors/HRADigital/php-exceptions)](https://github.com/HRADigital/php-exceptions/graphs/contributors)
+[![Stars](https://img.shields.io/github/stars/HRADigital/php-exceptions)](https://github.com/HRADigital/php-exceptions/stargazers)
+[![Code Size](https://img.shields.io/github/languages/code-size/HRADigital/php-exceptions)](https://github.com/HRADigital/php-exceptions)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
 A curated set of **reusable, semantic domain exceptions** for Domain-Driven Design (DDD) PHP applications.
 
-This package is **framework-agnostic** — zero runtime dependencies beyond the PHP standard library. It was extracted from [`hradigital/php-datatypes`](https://github.com/HRADigital/php-datatypes) so it can evolve independently and be reused across any PHP 8.1+ project.
+These are domain exceptions, not HTTP exceptions. Their names mirror the HTTP 4XX/5XX families because that vocabulary is widely understood, but they are raised in the **domain layer**, outside any transport, and translated at the boundary into an HTTP response, RPC error, CLI exit or queue dead-letter.
 
----
+Throwing the right exception is part of your domain language; a generic `\InvalidArgumentException` leaks plumbing into it. The package is framework-agnostic, with zero runtime dependencies beyond the PHP standard library, and works on any PHP 8.1+ project.
 
-## Why this package?
-
-These are **domain exceptions**, not HTTP exceptions. Their names and intent mirror the HTTP 4XX/5XX status families because the vocabulary is widely understood — but they are meant to be raised in the **domain layer**, outside any transport, and translated to a transport-specific representation (HTTP response, RPC error, CLI exit, queue dead-letter) at the boundary.
-
-Throwing the right exception is part of your domain language. Generic `\InvalidArgumentException` or `\RuntimeException` leak plumbing concerns into the domain. This library gives you:
-
-- **Semantic, intent-revealing exception types** organised into Client (caller-fault, 4XX-aligned) and Server (system-fault, 5XX-aligned) families.
-- **A common abstract base** (`AbstractBaseException`) that extends `\DomainException` so a single `catch` can capture everything in this package.
-- **No framework lock-in** — pure PHP, drop it into any application or framework.
+- **Client exceptions** - caller-fault types aligned to the 4XX family, from `BadRequestException` through `UnavailableForLegalReasonsException`, each carrying a sensible default message and status code.
+- **Server exceptions** - system-fault types aligned to the 5XX family, from `InternalServerErrorException` through `LoopDetectedException`.
+- **`AbstractBaseException`** - the common base, extending PHP's native `\DomainException`, so a single `catch` captures everything in this package.
+- **`Request\RequestFailureException`** - structured per-field validation failures, for the case where one rejected payload carries many reasons.
+- **Extension by intent** - every type is meant to be extended by your own named exception, so callers can still catch the broader intent.
+- **No framework lock-in** - pure PHP, dropped into any application or framework.
 
 ## Requirements
 
